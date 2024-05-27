@@ -26,7 +26,7 @@ type CSRF = string | null | (() => Promise<string>);
 export const useActiveStorage = (
   file?: File,
   callback?: Callback,
-  csrf?: CSRF /* specify a null CSRF to skips sending an "X-CSRF-TOKEN" header */
+  csrf?: CSRF /* specify a null CSRF to skips sending an "X-CSRF-TOKEN" header */,
 ): {
   uploading: boolean;
   progress?: Progress;
