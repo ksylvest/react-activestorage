@@ -1,0 +1,36 @@
+{
+  "name": "react-activestorage",
+  "version": "1.0.0",
+  "main": "index.js",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "activestorage",
+    "rails",
+    "react"
+  ],
+  "author": "Kevin Sylvestre",
+  "license": "MIT",
+  "description": "A hook to simplify integration of ActiveStorage with React",
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/spark-md5": "^3.0.4",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "dependencies": {
+    "spark-md5": "^3.0.2"
+  }
+}
