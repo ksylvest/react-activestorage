@@ -1,0 +1,14 @@
+name: ESLint
+on: push
+
+jobs:
+  prettier:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: Install
+        run: npm ci
+      - name: ESLint
+        run: npx eslint ./src
