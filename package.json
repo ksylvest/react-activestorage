@@ -1,6 +1,6 @@
 {
   "name": "react-activestorage",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
@@ -23,6 +23,10 @@
   "author": "Kevin Sylvestre",
   "license": "MIT",
   "description": "A hook to simplify integration of ActiveStorage with React",
+  "repository": {
+    "type": "git",
+    "url": "github:ksylvest/react-activestorage"
+  },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
     "@types/react": "^18.3.3",
