@@ -1,4 +1,4 @@
-name: typedoc
+name: TypeDoc
 
 on:
   push:
@@ -15,6 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+      - run: npm ci
       - run: npx typedoc src/index.ts
       - uses: actions/upload-pages-artifact@v3
         with:
