@@ -5,23 +5,24 @@ import { upload } from "./upload";
 
 const URL = "/rails/active_storage/direct_uploads";
 
-type Progress = {
+export type Progress = {
   loaded: number;
   total: number;
 };
 
-type Blob = {
+export type Blob = {
   signed_id: string;
   filename: string;
 };
 
-type Upload = {
+export type Upload = {
   url: string;
   headers: Record<string, string>;
 };
 
-type Callback = (params: { blob?: Blob; error?: Error }) => void;
-type CSRF = string | null | (() => Promise<string>);
+export type Callback = (params: { blob?: Blob; error?: Error }) => void;
+
+export type CSRF = string | null | (() => Promise<string>);
 
 export const useActiveStorage = (
   file?: File,
