@@ -1,5 +1,7 @@
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ksylvest/react-activestorage/blob/main/LICENSE)
 [![NPM](https://img.shields.io/npm/v/react-activestorage.svg)](https://www.npmjs.com/package/react-activestorage)
+[![GitHub](https://img.shields.io/badge/github-repo-blue.svg)](https://github.com/ksylvest/react-activestorage)
+[![TypeDoc](https://img.shields.io/badge/docs-site-blue.svg)](https://react-activestorage.ksylvest.com)
 
 ## Installation
 
