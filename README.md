@@ -25,7 +25,7 @@ const Example = () => {
       setError(error);
       setFile(undefined);
       form.current?.reset();
-    }
+    },
   );
 
   return (
