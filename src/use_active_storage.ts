@@ -1,38 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
-import { checksum } from "./checksum";
+import type { ActiveStorageProgress } from "./types/active_storage_progress";
+import type { ActiveStorageBlob } from "./types/active_storage_blob";
+import type { ActiveStorageCSRF } from "./types/active_storage_csrf";
+
 import { upload } from "./upload";
-
-const URL = "/rails/active_storage/direct_uploads";
-
-export type Progress = {
-  loaded: number;
-  total: number;
-};
-
-export type Blob = {
-  signed_id: string;
-  filename: string;
-};
-
-export type Upload = {
-  url: string;
-  headers: Record<string, string>;
-};
-
-export type Callback = (params: { blob?: Blob; error?: Error }) => void;
-
-export type CSRF = string | null | (() => Promise<string>);
 
 export const useActiveStorage = (
   file?: File,
-  callback?: Callback,
-  csrf?: CSRF /* specify a null CSRF to skips sending an "X-CSRF-TOKEN" header */,
-): {
-  uploading: boolean;
-  progress?: Progress;
-} => {
-  const [progress, setProgress] = useState<Progress | undefined>();
+  callback?: (_: { blob?: ActiveStorageBlob; error?: Error }) => void,
+  csrf?: ActiveStorageCSRF /* specify a null CSRF to skips sending an "X-CSRF-TOKEN" header */,
+) => {
+  const [progress, setProgress] = useState<ActiveStorageProgress | undefined>();
   const [uploading, setUploading] = useState<boolean>(false);
   const ref = useRef(callback);
 
@@ -47,54 +26,12 @@ export const useActiveStorage = (
       setUploading(true);
       setProgress(undefined);
 
-      const token = await (async () => {
-        if (typeof csrf === "function") {
-          return await csrf();
-        } else {
-          return csrf === undefined
-            ? document
-                ?.querySelector('meta[name="csrf-token"]')
-                ?.getAttribute("content")
-            : csrf;
-        }
-      })();
-
       try {
-        const response = await fetch(URL, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            ...(token ? { "X-CSRF-Token": token } : {}),
-          },
-          body: JSON.stringify({
-            blob: {
-              filename: file.name,
-              content_type: file.type,
-              byte_size: file.size,
-              checksum: await checksum(file),
-            },
-          }),
-        });
-
-        if (!response.ok)
-          throw new Error(`Unable to upload "${file.name}". Please try again.`);
-
-        const {
-          direct_upload: { url, headers },
-          ...blob
-        }: Blob & { direct_upload: Upload } = await response.json();
-
-        await upload({
-          method: "PUT",
-          url,
-          headers,
+        const blob = await upload({
           file,
-          progress: (progress) => {
-            setProgress(progress);
-          },
+          csrf,
+          progress: setProgress,
         });
-
         ref.current?.({ blob });
       } catch (error: Error | unknown) {
         ref.current?.({ error: error as Error });
