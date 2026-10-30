@@ -31,7 +31,7 @@
     "url": "github:ksylvest/react-activestorage"
   },
   "devDependencies": {
-    "@eslint/js": "^9.3.0",
+    "@eslint/js": "^10.0.1",
     "@types/react": "^19.0.0",
     "@types/spark-md5": "^3.0.4",
     "eslint-config-prettier": "^10.0.1",
